@@ -5,8 +5,6 @@ import com.codeborne.selenide.Configuration;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.BeforeAll;
 import owner.config.ProjectConfig;
-import owner.config.WebDriverConfig;
-
 
 
 public class TestBase {
