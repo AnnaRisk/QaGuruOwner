@@ -4,7 +4,10 @@ import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.Test;
 import owner.config.ApiConfig;
 
+import static io.restassured.RestAssured.given;
+import static io.restassured.http.ContentType.JSON;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.hamcrest.Matchers.is;
 
 public class ApiTest {
 
@@ -12,7 +15,16 @@ public class ApiTest {
     void apiTest() {
 
         ApiConfig config = ConfigFactory.create(ApiConfig.class, System.getProperties());
-        assertThat(config.baseUrl()).isEqualTo("https://github.com");
-        assertThat(config.token()).isEqualTo("my_token");
+        given()
+                .log().body()
+                .contentType(JSON)
+                .when()
+                .queryParam(config.token())
+                .get(config.baseUrl())
+                .then()
+                .log().status()
+                .log().body()
+                .statusCode(200);
+
     }
 }

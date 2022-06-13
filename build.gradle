@@ -81,3 +81,8 @@ tasks.withType(Test) {
             includeTags 'runtest'
         }
     }
+task apiTest(type: Test) {
+    useJUnitPlatform {
+        includeTags "apiTest"
+    }
+}
