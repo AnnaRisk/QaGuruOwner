@@ -65,9 +65,19 @@ tasks.withType(Test) {
         }
     }
 }
+tasks.withType(Test) {
+    useJUnitPlatform()
 
-task demowebshop(type: Test) {
-    useJUnitPlatform {
-        includeTags 'demowebshop'
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
     }
 }
+
+    task runtest(type: Test) {
+        useJUnitPlatform {
+            includeTags 'runtest'
+        }
+    }
